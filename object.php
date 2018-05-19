@@ -3,12 +3,45 @@ $id = $_REQUEST['id'];
 
 $object = array(
     'title' => '',
-    'question' => '',
     'description' => '',
     'code' => '',
-    'date' => '',
+    'submitted_at' => '',
 );
 
+//DB credentials
+$servername = 'localhost';
+$username = 'root';
+$password = '';
+
+//Create connection
+$connection = new mysqli($servername, $username, $password);
+
+//Check for error
+if ($connection->connect_error) {
+    echo 'Connection Failed:' . $connection->connect_error;
+    exit;
+}
+//otherwise, print success
+/*else {
+    echo 'Connection Successful';
+}*/
+//Connect to the 'fitl' database
+$connection->select_db('fitl');
+
+//Query to select the object
+$sql = 'Select * from questions where id = ' . $id;
+
+//execute the query
+$result = $connection->query($sql);
+
+//check for and retrieve the object
+if ($result->num_rows > 0) {
+    $object = $result->fetch_assoc();
+    /*echo '<pre>';
+    print_r($object);
+    echo '</pre>';*/
+}
+/*
 //set the object variables based on the id value from the url
 if ($id == 1) {
     $object = array(
@@ -31,7 +64,7 @@ elseif ($id == 2) {
             &lt;/ul&gt;',
         'date' => 'June 16, 2015',
     );
-}
+}*/
 
 
 
@@ -44,11 +77,11 @@ elseif ($id == 2) {
 </head>
 	<body>
 
-        <h1><?= $object['question'] ?></h1>
+        <h1><?= $object['title'] ?></h1>
 		<p><?= $object['description'] ?></p>
 	    <pre>
             <?= $object['code'] ?>
         </pre>
-        <p><?= $object['date'] ?></p>
+        <p><?= $object['submitted_at'] ?></p>
 	</body>
 </html>
