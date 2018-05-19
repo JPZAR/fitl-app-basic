@@ -16,7 +16,7 @@ if ($id == 1) {
         'question' => 'I\'m having trouble displaying a JS alert.',
         'description' => 'I think I\'m using the correct function, but I can\'t figure out what\'s wrong. Could you point me in the right direction?',
         'code' => 'alert(This is a message)',
-        'date' => 'June 21, 2015',
+        'date' => 'June 11, 2015',
     );
 }
 elseif ($id == 2) {
